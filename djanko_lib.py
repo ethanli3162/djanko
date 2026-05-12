@@ -1,6 +1,6 @@
 import os
 class pyx:
-    html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><link rel="stylesheet" href="https://pyscript.net/releases/2026.3.1/core.css"/><script type="module" src="https://pyscript.net/releases/2026.3.1/core.js"></script></head><body></body></html>'
+    html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><script src="https://cdn.jsdelivr.net/pyodide/v0.29.4/full/pyodide.js"></script></head><body></body></html>'
     def add_style(self, href):
         self.html = self.html.replace('</head>', f'<link rel="stylesheet" href="{href}"></head>')
     def add_script(self, src):
@@ -74,11 +74,8 @@ def br():
 def hr():
     return '<hr>'
 
-def python(code, compiler='py', terminal=False):
-    if terminal:
-        return ('</body>', f'<script type="{compiler}" terminal>{code}</script></body>')
-    else:
-        return ('</body>', f'<script type="{compiler}">{code}</script></body>')
+def python(code):
+    return '<script type="text/javascript">async function main(){let pyodide = await loadPyodide();console.log(pyodide.runPython(`' + code + '`));}main();</script>'
 
 def pyscript(filename):
     filename = os.path.join(os.getcwd(), filename)
