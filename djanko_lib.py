@@ -1,6 +1,6 @@
 import os
 class pyx:
-    html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><script src="https://cdn.jsdelivr.net/pyodide/v0.29.4/full/pyodide.js"></script></head><body></body></html>'
+    html = """<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><script src="https://cdn.jsdelivr.net/pyodide/v0.29.4/full/pyodide.js"></script><script> async function setup() { const pyodide = await loadPyodide(); class PythonRun extends HTMLElement { async connectedCallback() { const code = this.textContent.trim(); try { const result = await pyodide.runPythonAsync(code); if (result !== undefined) this.innerText = result; } catch (err) { this.innerText = `Error: ${err}`; } } } customElements.define('pyodide', PythonRun); } setup(); </script></head><body></body></html>"""
     def add_style(self, href):
         self.html = self.html.replace('</head>', f'<link rel="stylesheet" href="{href}"></head>')
     def add_script(self, src):
@@ -75,7 +75,7 @@ def hr():
     return '<hr>'
 
 def python(code):
-    return '<script type="text/javascript">async function main(){let pyodide = await loadPyodide();console.log(pyodide.runPython(`' + code + '`));}main();</script>'
+    return f'<python>{code}</python>'
 
 def pyscript(filename):
     filename = os.path.join(os.getcwd(), filename)
