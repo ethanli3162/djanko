@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><link rel="stylesheet" href="https://pyscript.net/releases/2026.3.1/core.css"/><script type="module" src="https://pyscript.net/releases/2026.3.1/core.js"></script><title>Pyodide Test</title></head><body><h1 id="loading-element">Loading...</h1><script type="py">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><script src="https://cdn.jsdelivr.net/pyodide/v0.29.4/full/pyodide.js"></script></head><body><h id="loading-element">Loading</h><script type="text/javascript">async function main(){let pyodide = await loadPyodide();console.log(pyodide.runPython(`
 from js import *
 import asyncio
 import pyodide_js
@@ -90,5 +90,4 @@ async def main():
         element.style.fontSize = f"{50}px"
         await asyncio.sleep(0.01)
 main()
-
-</script></body></html>
+`));}main();</script></body></html>
